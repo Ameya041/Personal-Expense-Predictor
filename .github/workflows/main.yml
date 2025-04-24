@@ -1,0 +1,94 @@
+📄 main.yaml
+
+project:
+  name: Personal Expense Predictor
+  description: >
+    A web-based machine learning project to predict monthly personal expenses
+    using a Linear Regression model trained on income and expense categories.
+    Built using Flask, HTML/CSS/JS, scikit-learn, and containerized with Docker.
+  version: 1.0
+  license: MIT
+  authors:
+    - name: Amey Hiremath
+      id: 1RVU23CSE041
+    - name: Anushka Jha
+      id: 1RVU23CSE067
+    - name: Aayan Sheikh
+      id: 1RVU23CSE008
+    - name: Abdul Qadir Sheikh
+      id: 1RVU23CSE010
+
+tech_stack:
+  frontend:
+    - HTML
+    - CSS
+    - JavaScript
+  backend:
+    - Python
+    - Flask
+  machine_learning:
+    - scikit-learn
+    - pickle
+    - numpy
+  devops:
+    - Docker
+    - Python venv
+    - Postman
+    - Pytest
+
+features:
+  - Web form to input monthly financial data
+  - ML model predicts next month's expense
+  - REST API (Flask) or server-rendered form (Jinja2)
+  - Containerized with Docker for easy deployment
+
+ml_model:
+  name: LinearRegression
+  features:
+    - income
+    - rent
+    - grocery
+    - transport
+    - subscriptions
+    - misc
+  target: predicted_total_expense
+  file: app/model/expense_model.pkl
+
+paths:
+  frontend:
+    - app/templates/form.html
+    - app/templates/index.html
+    - app/static/style.css
+  backend:
+    - app/app.py
+    - app/model/train_model.py
+    - app/model/predictor.py
+  docker:
+    - Dockerfile
+  requirements: requirements.txt (optional)
+
+deployment:
+  docker:
+    base_image: python:3.10-slim
+    exposed_port: 5000
+    entry_point: python app/app.py
+    build_command: docker build -t expense-predictor .
+    run_command: docker run -p 5000:5000 expense-predictor
+
+testing:
+  tools:
+    - Postman
+    - Pytest
+    - Chrome DevTools
+  strategy:
+    - unit_tests: true
+    - integration_tests: true
+    - system_tests: true
+    - regression_tests: true
+
+future_scope:
+  - Add login and user history
+  - Integrate persistent database (SQLite or PostgreSQL)
+  - Add chart.js for visualization
+  - Upgrade model to Random Forest or LSTM
+  - Deploy to Render, Railway, or AWS EC2
