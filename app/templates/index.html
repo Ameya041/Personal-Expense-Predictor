@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Personal Expense Predictor</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Personal Expense Predictor</h1>
+        <form id="expense-form">
+            <input type="number" id="income" placeholder="Monthly Income" required>
+            <input type="number" id="rent" placeholder="Rent/EMI" required>
+            <input type="number" id="grocery" placeholder="Grocery" required>
+            <input type="number" id="transport" placeholder="Transport" required>
+            <input type="number" id="subs" placeholder="Subscriptions" required>
+            <input type="number" id="misc" placeholder="Miscellaneous" required>
+            <button type="submit">Predict Expense</button>
+        </form>
+        <h2 id="result"></h2>
+    </div>
+
+    <script>
+        document.getElementById('expense-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const data = {
+                income: parseFloat(document.getElementById('income').value),
+                rent: parseFloat(document.getElementById('rent').value),
+                grocery: parseFloat(document.getElementById('grocery').value),
+                transport: parseFloat(document.getElementById('transport').value),
+                subs: parseFloat(document.getElementById('subs').value),
+                misc: parseFloat(document.getElementById('misc').value)
+            };
+
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            document.getElementById('result').innerText = result.predicted_expense
+                ? `Predicted Expense: ₹${result.predicted_expense}`
+                : `Error: ${result.error}`;
+        });
+    </script>
+</body>
+</html>
