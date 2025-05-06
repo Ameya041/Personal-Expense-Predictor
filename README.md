@@ -1,6 +1,6 @@
 🧮 Personal Expense Predictor
 
-This project is a web-based application that predicts your next month's expenses using machine learning. Built using *Flask*, **scikit-learn, and **Bootstrap*, it provides a simple yet functional interface to input your monthly spending habits and get predictions.
+This project is a web-based application that predicts your next month's expenses using machine learning. Built using **Flask**, **scikit-learn**, and **Bootstrap**, it provides a simple yet functional interface to input your monthly spending habits and get predictions.
 
 🚀 Features
 
