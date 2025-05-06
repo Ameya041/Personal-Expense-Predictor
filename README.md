@@ -13,16 +13,16 @@ This project is a web-based application that predicts your next month's expenses
 
  💻 Tech Stack
 
-*Frontend*:
+**Frontend**:
 - HTML, CSS, Bootstrap
 - Chart.js for graphs
 
-*Backend*:
+**Backend**:
 - Python with Flask
 - scikit-learn for machine learning
 - NumPy, Pandas
 
-*DevOps*:
+**DevOps**:
 - Docker
 - Kubernetes
 
