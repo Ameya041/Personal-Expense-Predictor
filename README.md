@@ -36,4 +36,4 @@ The model is trained using mock monthly financial data:
 - Entertainment
 - Other Expenses
 
-Model used: LinearRegression from scikit-learn.
+Model used: ```LinearRegression``` from ```scikit-learn```.
