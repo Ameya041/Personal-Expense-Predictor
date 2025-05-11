@@ -2,4 +2,3 @@ Flask
 Flask-Cors 
 scikit-learn 
 numpy
-os
