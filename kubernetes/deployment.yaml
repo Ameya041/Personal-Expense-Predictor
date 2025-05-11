@@ -16,7 +16,7 @@ spec:
       - name: dockerhub-secret
       containers:
       - name: flask-app
-        image: ameyhiremath/personal-expense-predictor:latest
+        image: ameyhiremath/personal-expense-predictor:fixed
         ports:
         - containerPort: 5000
         env:
