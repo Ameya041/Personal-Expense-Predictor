@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from model.predictor import ExpensePredictor
 
-app = Flask(_name_)
+app = Flask(__name__)
 model = ExpensePredictor()
 
 @app.route('/', methods=['GET', 'POST'])
@@ -41,5 +41,5 @@ def index():
 
     return render_template('form.html', prediction=prediction, chart_data=chart_data)
 
-if _name_ == '_main_':
-    app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=os.getenv('FLASK_DEBUG', 'False') == 'True')
