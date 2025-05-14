@@ -1,0 +1,50 @@
+[
+  {
+    "month": "May 2025",
+    "predicted": 71846.84,
+    "actual": 94000.0,
+    "categories": {
+      "Rent/EMI": 50000.0,
+      "Grocery": 8000.0,
+      "Transport": 5000.0,
+      "Subscriptions": 6000.0,
+      "Miscellaneous": 25000.0
+    }
+  },
+  {
+    "month": "May 2025",
+    "predicted": 71240.86,
+    "actual": 94000.0,
+    "categories": {
+      "Rent/EMI": 55000.0,
+      "Grocery": 5000.0,
+      "Transport": 4000.0,
+      "Subscriptions": 8000.0,
+      "Miscellaneous": 22000.0
+    }
+  },
+  {
+    "month": "May 2025",
+    "predicted": 76598.98,
+    "actual": 94000.0,
+    "categories": {
+      "Rent/EMI": 50000.0,
+      "Grocery": 5000.0,
+      "Transport": 6000.0,
+      "Subscriptions": 8000.0,
+      "Miscellaneous": 25000.0
+    }
+  },
+  {
+    "month": "May 2025",
+    "predicted": 66461.04,
+    "actual": 81000.0,
+    "categories": {
+      "Rent/EMI": 50000.0,
+      "Grocery": 3000.0,
+      "Transport": 4000.0,
+      "Subscriptions": 4000.0,
+      "Miscellaneous": 20000.0
+    }
+  }
+]
