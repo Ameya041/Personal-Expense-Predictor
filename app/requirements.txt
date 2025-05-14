@@ -1,4 +1,3 @@
-Flask 
-Flask-Cors 
-scikit-learn 
-numpy
+Flask==2.3.2
+scikit-learn==1.3.0
+numpy==1.24.3
