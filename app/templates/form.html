@@ -1,67 +1,243 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
-  <title>Expense Predictor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Predictor | Smart Budget Planner</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
 </head>
-<body class="bg-light">
-  <div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="card shadow p-4" style="width: 100%; max-width: 500px;">
-      <h2 class="text-center mb-4">Personal Expense Predictor</h2>
-      <form method="POST">
-        <div class="mb-3">
-          <label class="form-label">Monthly Income</label>
-          <input type="number" name="income" class="form-control" required>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1 class="display-4 mb-3">Smart Expense Predictor</h1>
+      <p class="lead">Plan your finances smarter with AI-powered predictions</p>
+    </header>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="card">
+          <h2 class="h4 mb-4"><i class="fas fa-calculator me-2"></i>Expense Calculator</h2>
+          <form method="POST">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Monthly Income (₹)</label>
+                  <input type="number" name="income" class="form-control" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Rent/EMI (₹)</label>
+                  <input type="number" name="rent" class="form-control" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Grocery (₹)</label>
+                  <input type="number" name="grocery" class="form-control" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Transport (₹)</label>
+                  <input type="number" name="transport" class="form-control" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Subscriptions (₹)</label>
+                  <input type="number" name="subscriptions" class="form-control" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Miscellaneous (₹)</label>
+                  <input type="number" name="misc" class="form-control" required>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 mt-3">
+              <i class="fas fa-chart-line me-2"></i>Generate Prediction
+            </button>
+          </form>
         </div>
-        <div class="mb-3">
-          <label class="form-label">Rent/EMI</label>
-          <input type="number" name="rent" class="form-control" required>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Grocery</label>
-          <input type="number" name="grocery" class="form-control" required>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Transport</label>
-          <input type="number" name="transport" class="form-control" required>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Subscriptions</label>
-          <input type="number" name="subscriptions" class="form-control" required>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Miscellaneous</label>
-          <input type="number" name="misc" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-primary w-100">Predict</button>
-      </form>
+      </div>
 
       {% if prediction %}
-        <div class="alert alert-success mt-4 text-center">
-          Predicted Expense Next Month: ₹{{ prediction }}
+      <div class="col-lg-6">
+        <div class="card">
+          <h2 class="h4 mb-4"><i class="fas fa-chart-pie me-2"></i>Your Financial Insights</h2>
+          
+          <div class="alert alert-success">
+            <h3 class="h5 mb-2">Next Month's Prediction</h3>
+            <p class="display-6 mb-0">₹{{ prediction }}</p>
+            <small class="text-muted">Based on your current spending patterns</small>
+          </div>
+
+          <div class="chart-container">
+            <canvas id="expenseChart"></canvas>
+          </div>
+
+          <div class="mt-4">
+            <h3 class="h5">Budget Recommendations</h3>
+            <div class="progress mb-2">
+              <div class="progress-bar bg-success" style="width: 50%">Needs (50%)</div>
+              <div class="progress-bar bg-info" style="width: 30%">Wants (30%)</div>
+              <div class="progress-bar bg-warning" style="width: 20%">Savings (20%)</div>
+            </div>
+          </div>
         </div>
-        <h5 class="text-center mt-4">Your Current Expenses Breakdown</h5>
-        <canvas id="expenseChart" width="400" height="400"></canvas>
+      </div>
       {% endif %}
     </div>
+
+    <!-- Previous form.html content remains the same until the script section -->
+  {% if prediction %}
+  <div class="card mt-4">
+    <h2 class="h4 mb-4"><i class="fas fa-history me-2"></i>Expense Trends</h2>
+    <div class="chart-container" style="height: 400px;">
+      <canvas id="trendChart"></canvas>
+    </div>
   </div>
+  {% endif %}
+
+  <button class="btn btn-primary theme-toggle" id="themeToggle">
+    <i class="fas fa-moon"></i>
+  </button>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/index.js') }}"></script>
+
+  {% if chart_data %}
   <script>
-    {% if chart_data %}
-      const ctx = document.getElementById('expenseChart').getContext('2d');
-      new Chart(ctx, {
-        type: 'pie',
-        data: {
-          labels: {{ chart_data.keys()|list|tojson }},
-          datasets: [{
-            data: {{ chart_data.values()|list|tojson }},
-            backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545']
-          }]
+    // Current Expenses Pie Chart
+    const ctx = document.getElementById('expenseChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: {{ chart_data.keys()|list|tojson }},
+        datasets: [{
+          data: {{ chart_data.values()|list|tojson }},
+          backgroundColor: [
+            '#4361ee', '#3f37c9', '#4cc9f0', 
+            '#4895ef', '#560bad', '#f72585'
+          ],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'right',
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const label = context.label || '';
+                const value = context.raw || 0;
+                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                const percentage = Math.round((value / total) * 100);
+                return `${label}: ₹${value.toLocaleString()} (${percentage}%)`;
+              }
+            }
+          }
         }
-      });
-    {% endif %}
+      }
+    });
+
+    // Enhanced trend chart
+    document.addEventListener('DOMContentLoaded', function() {
+        const trendCtx = document.getElementById('trendChart').getContext('2d');
+        const history = {{ trends|tojson }};
+        
+        if (history.length === 0) return;
+        
+        const labels = history.map(item => item.month);
+        const predicted = history.map(item => item.predicted);
+        const actual = history.map(item => item.actual);
+        
+        new Chart(trendCtx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Predicted Expenses',
+                        data: predicted,
+                        borderColor: '#4361ee',
+                        backgroundColor: 'rgba(67, 97, 238, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    },
+                    {
+                        label: 'Actual Expenses',
+                        data: actual,
+                        borderColor: '#f72585',
+                        backgroundColor: 'rgba(247, 37, 133, 0.1)',
+                        tension: 0.4,
+                        fill: false,
+                        borderDash: [5, 5]
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '12-Month Expense Trend'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.dataset.label}: ₹${context.raw.toLocaleString()}`;
+                            },
+                            footer: function(context) {
+                                if (context[0].datasetIndex === 0) return null;
+                                const index = context[0].dataIndex;
+                                const categories = history[index].categories;
+                                let footer = ['Category Breakdown:'];
+                                for (const [category, amount] of Object.entries(categories)) {
+                                    footer.push(`${category}: ₹${amount.toLocaleString()}`);
+                                }
+                                return footer;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        title: {
+                            display: true,
+                            text: 'Amount (₹)'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return '₹' + value.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    });
   </script>
+  {% endif %}
 </body>
 </html>
